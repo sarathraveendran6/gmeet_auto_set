@@ -2,11 +2,12 @@
 <html>
 <head>
   <title>Google Meet Auto Settings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
       width: 300px;
       padding: 18px 10px 14px 10px;
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', Arial, sans-serif;
       background: #18191a;
       color: #e0e0e0;
       margin: 0;
@@ -15,11 +16,24 @@
       align-items: center;
     }
     h1 {
-      font-size: 16px;
-      margin-bottom: 18px;
-      color: #1a73e8;
+      font-family: 'Poppins', 'Inter', Arial, sans-serif;
+      font-size: 17px;
+      margin-bottom: 10px;
+      color: #f5f7fa;
       font-weight: 700;
       letter-spacing: 0.01em;
+      text-align: center;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .divider {
+      width: 80%;
+      height: 2px;
+      background: linear-gradient(90deg, #a259f7 0%, #6a82fb 100%);
+      border: none;
+      border-radius: 2px;
+      margin: 0 0 22px 0;
+      opacity: 0.7;
+      box-shadow: 0 1px 4px rgba(162,89,247,0.10);
     }
     .popup-setting-card {
       display: flex;
@@ -37,11 +51,12 @@
     .setting-label {
       font-size: 15px;
       font-weight: 500;
-      color: #e0e0e0;
+      color: #f0f0f0;
       margin-right: 18px;
       letter-spacing: 0.01em;
       flex: 1;
       text-align: left;
+      font-family: 'Inter', Arial, sans-serif;
     }
     .custom-switch-label {
       display: flex;
@@ -71,7 +86,7 @@
       transition: background 0.2s;
     }
     .custom-switch input:checked + .custom-slider {
-      background: #1a73e8;
+      background: linear-gradient(90deg, #a259f7 0%, #6a82fb 100%);
     }
     .custom-slider:before {
       position: absolute;
@@ -126,6 +141,7 @@
 </head>
 <body>
   <h1>Google Meet Auto Settings</h1>
+  <div class="divider"></div>
   <div class="popup-setting-card">
     <span class="setting-label">Auto disable camera</span>
     <label class="custom-switch-label">
