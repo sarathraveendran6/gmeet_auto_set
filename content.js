@@ -118,22 +118,20 @@ function injectMicToggle() {
             flex-direction: column;
             align-items: center;
             margin-left: 8px;
-            background: rgba(32,32,32,0.7);
-            border-radius: 12px;
-            padding: 6px 8px 4px 8px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+            margin-top: 10px;
+            background: none;
+            border-radius: 14px;
+            padding: 0;
+            box-shadow: none;
             cursor: pointer;
             user-select: none;
             transition: background 0.2s;
             position: relative;
         }
-        .custom-switch-label:hover {
-            background: rgba(40,40,40,0.92);
-        }
         .custom-switch {
             position: relative;
-            width: 26px;
-            height: 14px;
+            width: 36px;
+            height: 20px;
             margin-bottom: 0;
         }
         .custom-switch input {
@@ -146,17 +144,18 @@ function injectMicToggle() {
             cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
             background: #bbb;
-            border-radius: 14px;
+            border-radius: 20px;
             transition: background 0.2s;
+            box-shadow: 0 2px 8px rgba(162,89,247,0.10);
         }
         .custom-switch input:checked + .custom-slider {
-            background: #1a73e8;
+            background: linear-gradient(90deg, #a259f7 0%, #6a82fb 100%);
         }
         .custom-slider:before {
             position: absolute;
             content: '';
-            height: 10px;
-            width: 10px;
+            height: 16px;
+            width: 16px;
             left: 2px;
             bottom: 2px;
             background: #fff;
@@ -165,7 +164,7 @@ function injectMicToggle() {
             box-shadow: 0 1px 2px rgba(0,0,0,0.10);
         }
         .custom-switch input:checked + .custom-slider:before {
-            transform: translateX(12px);
+            transform: translateX(16px);
         }
         .custom-switch-label .custom-tooltip {
             visibility: hidden;
@@ -255,22 +254,20 @@ function injectCameraToggle() {
             flex-direction: column;
             align-items: center;
             margin-left: 8px;
-            background: rgba(32,32,32,0.7);
-            border-radius: 12px;
-            padding: 6px 8px 4px 8px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+            margin-top: 10px;
+            background: none;
+            border-radius: 14px;
+            padding: 0;
+            box-shadow: none;
             cursor: pointer;
             user-select: none;
             transition: background 0.2s;
             position: relative;
         }
-        .custom-switch-label:hover {
-            background: rgba(40,40,40,0.92);
-        }
         .custom-switch {
             position: relative;
-            width: 26px;
-            height: 14px;
+            width: 36px;
+            height: 20px;
             margin-bottom: 0;
         }
         .custom-switch input {
@@ -283,17 +280,18 @@ function injectCameraToggle() {
             cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
             background: #bbb;
-            border-radius: 14px;
+            border-radius: 20px;
             transition: background 0.2s;
+            box-shadow: 0 2px 8px rgba(162,89,247,0.10);
         }
         .custom-switch input:checked + .custom-slider {
-            background: #1a73e8;
+            background: linear-gradient(90deg, #a259f7 0%, #6a82fb 100%);
         }
         .custom-slider:before {
             position: absolute;
             content: '';
-            height: 10px;
-            width: 10px;
+            height: 16px;
+            width: 16px;
             left: 2px;
             bottom: 2px;
             background: #fff;
@@ -302,7 +300,7 @@ function injectCameraToggle() {
             box-shadow: 0 1px 2px rgba(0,0,0,0.10);
         }
         .custom-switch input:checked + .custom-slider:before {
-            transform: translateX(12px);
+            transform: translateX(16px);
         }
         .custom-switch-label .custom-tooltip {
             visibility: hidden;
