@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Meet Auto Settings</title>
+  <style>
+    body {
+      width: 300px;
+      padding: 15px;
+      font-family: Arial, sans-serif;
+    }
+    .setting {
+      margin-bottom: 15px;
+    }
+    .setting label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .setting input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    h1 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #1a73e8;
+    }
+  </style>
+</head>
+<body>
+  <h1>Google Meet Auto Settings</h1>
+  <div class="setting">
+    <label>
+      <input type="checkbox" id="camera-enabled">
+      Disable camera by default
+    </label>
+  </div>
+  <div class="setting">
+    <label>
+      <input type="checkbox" id="mic-enabled">
+      Disable microphone by default
+    </label>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html> 
