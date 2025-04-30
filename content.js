@@ -108,35 +108,135 @@ function injectMicToggle() {
     const micContainer = document.querySelector('div.Pr6Uwe');
     if (!micContainer || micContainer.querySelector('#custom-mic-toggle')) return;
 
+    // Add custom styles for the toggle
+    if (!document.getElementById('custom-toggle-style')) {
+        const style = document.createElement('style');
+        style.id = 'custom-toggle-style';
+        style.textContent = `
+        .custom-switch-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 8px;
+            background: rgba(32,32,32,0.7);
+            border-radius: 12px;
+            padding: 6px 8px 4px 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+            position: relative;
+        }
+        .custom-switch-label:hover {
+            background: rgba(40,40,40,0.92);
+        }
+        .custom-switch {
+            position: relative;
+            width: 26px;
+            height: 14px;
+            margin-bottom: 0;
+        }
+        .custom-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .custom-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #bbb;
+            border-radius: 14px;
+            transition: background 0.2s;
+        }
+        .custom-switch input:checked + .custom-slider {
+            background: #1a73e8;
+        }
+        .custom-slider:before {
+            position: absolute;
+            content: '';
+            height: 10px;
+            width: 10px;
+            left: 2px;
+            bottom: 2px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+        }
+        .custom-switch input:checked + .custom-slider:before {
+            transform: translateX(12px);
+        }
+        .custom-switch-label .custom-tooltip {
+            visibility: hidden;
+            opacity: 0;
+            width: 220px;
+            background: #222;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 6px 10px;
+            position: absolute;
+            z-index: 1001;
+            left: 50%;
+            bottom: 110%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            font-weight: 400;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+        }
+        .custom-switch-label .custom-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: #222 transparent transparent transparent;
+        }
+        .custom-switch-label:hover .custom-tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        `;
+        document.head.appendChild(style);
+    }
+
     const toggleLabel = document.createElement('label');
-    toggleLabel.style.display = 'flex';
-    toggleLabel.style.alignItems = 'center';
-    toggleLabel.style.marginLeft = '12px';
-    toggleLabel.style.fontSize = '12px';
-    toggleLabel.style.cursor = 'pointer';
-    toggleLabel.title = 'Auto-mute mic on join';
+    toggleLabel.className = 'custom-switch-label';
+    toggleLabel.title = '';
+
+    const switchDiv = document.createElement('span');
+    switchDiv.className = 'custom-switch';
 
     const toggle = document.createElement('input');
     toggle.type = 'checkbox';
     toggle.id = 'custom-mic-toggle';
-    toggle.style.marginRight = '4px';
 
-    const span = document.createElement('span');
-    span.textContent = 'Auto-mute';
+    const slider = document.createElement('span');
+    slider.className = 'custom-slider';
 
-    toggleLabel.appendChild(toggle);
-    toggleLabel.appendChild(span);
+    switchDiv.appendChild(toggle);
+    switchDiv.appendChild(slider);
+
+    // Tooltip
+    const tooltip = document.createElement('span');
+    tooltip.className = 'custom-tooltip';
+    tooltip.textContent = 'If enabled, your mic will be off by default when you join.';
+
+    toggleLabel.appendChild(switchDiv);
+    toggleLabel.appendChild(tooltip);
     micContainer.appendChild(toggleLabel);
 
     chrome.storage.sync.get(['micEnabled'], (result) => {
-        // If micEnabled is false (auto-mute), toggle is checked
         toggle.checked = result.micEnabled === false;
     });
 
     toggle.addEventListener('change', (e) => {
-        // If checked, set micEnabled to false (auto-mute); if unchecked, set to true
         chrome.storage.sync.set({ micEnabled: !e.target.checked });
-        // Do NOT toggle the mic immediately
     });
 }
 
@@ -145,35 +245,135 @@ function injectCameraToggle() {
     const camContainer = document.querySelector('div.utiQxe');
     if (!camContainer || camContainer.querySelector('#custom-cam-toggle')) return;
 
+    // Add custom styles for the toggle (already added by mic, but safe to check)
+    if (!document.getElementById('custom-toggle-style')) {
+        const style = document.createElement('style');
+        style.id = 'custom-toggle-style';
+        style.textContent = `
+        .custom-switch-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 8px;
+            background: rgba(32,32,32,0.7);
+            border-radius: 12px;
+            padding: 6px 8px 4px 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+            position: relative;
+        }
+        .custom-switch-label:hover {
+            background: rgba(40,40,40,0.92);
+        }
+        .custom-switch {
+            position: relative;
+            width: 26px;
+            height: 14px;
+            margin-bottom: 0;
+        }
+        .custom-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .custom-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #bbb;
+            border-radius: 14px;
+            transition: background 0.2s;
+        }
+        .custom-switch input:checked + .custom-slider {
+            background: #1a73e8;
+        }
+        .custom-slider:before {
+            position: absolute;
+            content: '';
+            height: 10px;
+            width: 10px;
+            left: 2px;
+            bottom: 2px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+        }
+        .custom-switch input:checked + .custom-slider:before {
+            transform: translateX(12px);
+        }
+        .custom-switch-label .custom-tooltip {
+            visibility: hidden;
+            opacity: 0;
+            width: 220px;
+            background: #222;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 6px 10px;
+            position: absolute;
+            z-index: 1001;
+            left: 50%;
+            bottom: 110%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            font-weight: 400;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+        }
+        .custom-switch-label .custom-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: #222 transparent transparent transparent;
+        }
+        .custom-switch-label:hover .custom-tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        `;
+        document.head.appendChild(style);
+    }
+
     const toggleLabel = document.createElement('label');
-    toggleLabel.style.display = 'flex';
-    toggleLabel.style.alignItems = 'center';
-    toggleLabel.style.marginLeft = '12px';
-    toggleLabel.style.fontSize = '12px';
-    toggleLabel.style.cursor = 'pointer';
-    toggleLabel.title = 'Auto-mute camera on join';
+    toggleLabel.className = 'custom-switch-label';
+    toggleLabel.title = '';
+
+    const switchDiv = document.createElement('span');
+    switchDiv.className = 'custom-switch';
 
     const toggle = document.createElement('input');
     toggle.type = 'checkbox';
     toggle.id = 'custom-cam-toggle';
-    toggle.style.marginRight = '4px';
 
-    const span = document.createElement('span');
-    span.textContent = 'Auto-mute camera';
+    const slider = document.createElement('span');
+    slider.className = 'custom-slider';
 
-    toggleLabel.appendChild(toggle);
-    toggleLabel.appendChild(span);
+    switchDiv.appendChild(toggle);
+    switchDiv.appendChild(slider);
+
+    // Tooltip
+    const tooltip = document.createElement('span');
+    tooltip.className = 'custom-tooltip';
+    tooltip.textContent = 'If enabled, your camera will be off by default when you join.';
+
+    toggleLabel.appendChild(switchDiv);
+    toggleLabel.appendChild(tooltip);
     camContainer.appendChild(toggleLabel);
 
     chrome.storage.sync.get(['cameraEnabled'], (result) => {
-        // If cameraEnabled is false (auto-mute), toggle is checked
         toggle.checked = result.cameraEnabled === false;
     });
 
     toggle.addEventListener('change', (e) => {
-        // If checked, set cameraEnabled to false (auto-mute); if unchecked, set to true
         chrome.storage.sync.set({ cameraEnabled: !e.target.checked });
-        // Do NOT toggle the camera immediately
     });
 }
 
