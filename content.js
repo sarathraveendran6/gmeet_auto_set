@@ -113,12 +113,16 @@ function injectMicToggle() {
         const style = document.createElement('style');
         style.id = 'custom-toggle-style';
         style.textContent = `
+        .custom-toggle-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            width: 100%;
+        }
         .custom-switch-label {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-left: 8px;
-            margin-top: 10px;
             background: none;
             border-radius: 14px;
             padding: 0;
@@ -126,7 +130,6 @@ function injectMicToggle() {
             cursor: pointer;
             user-select: none;
             transition: background 0.2s;
-            position: relative;
         }
         .custom-switch {
             position: relative;
@@ -203,6 +206,10 @@ function injectMicToggle() {
         `;
         document.head.appendChild(style);
     }
+
+    // Create a wrapper for centering
+    const wrapper = document.createElement('div');
+    wrapper.className = 'custom-toggle-wrapper';
 
     const toggleLabel = document.createElement('label');
     toggleLabel.className = 'custom-switch-label';
@@ -228,7 +235,8 @@ function injectMicToggle() {
 
     toggleLabel.appendChild(switchDiv);
     toggleLabel.appendChild(tooltip);
-    micContainer.appendChild(toggleLabel);
+    wrapper.appendChild(toggleLabel);
+    micContainer.appendChild(wrapper);
 
     chrome.storage.sync.get(['micEnabled'], (result) => {
         toggle.checked = result.micEnabled === false;
@@ -249,12 +257,16 @@ function injectCameraToggle() {
         const style = document.createElement('style');
         style.id = 'custom-toggle-style';
         style.textContent = `
+        .custom-toggle-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            width: 100%;
+        }
         .custom-switch-label {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-left: 8px;
-            margin-top: 10px;
             background: none;
             border-radius: 14px;
             padding: 0;
@@ -262,7 +274,6 @@ function injectCameraToggle() {
             cursor: pointer;
             user-select: none;
             transition: background 0.2s;
-            position: relative;
         }
         .custom-switch {
             position: relative;
@@ -340,6 +351,10 @@ function injectCameraToggle() {
         document.head.appendChild(style);
     }
 
+    // Create a wrapper for centering
+    const wrapper = document.createElement('div');
+    wrapper.className = 'custom-toggle-wrapper';
+
     const toggleLabel = document.createElement('label');
     toggleLabel.className = 'custom-switch-label';
     toggleLabel.title = '';
@@ -364,7 +379,8 @@ function injectCameraToggle() {
 
     toggleLabel.appendChild(switchDiv);
     toggleLabel.appendChild(tooltip);
-    camContainer.appendChild(toggleLabel);
+    wrapper.appendChild(toggleLabel);
+    camContainer.appendChild(wrapper);
 
     chrome.storage.sync.get(['cameraEnabled'], (result) => {
         toggle.checked = result.cameraEnabled === false;
