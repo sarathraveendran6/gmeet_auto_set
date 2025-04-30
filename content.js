@@ -101,6 +101,13 @@ function createToggleUI() {
         chrome.storage.sync.set({ micEnabled: e.target.checked });
         // Do NOT toggle the mic immediately
     });
+
+    // Listen for storage changes to sync toggle in real time
+    chrome.storage.onChanged.addListener((changes, area) => {
+        if (area === 'sync' && changes.micEnabled) {
+            document.getElementById('mic-toggle').checked = changes.micEnabled.newValue === false;
+        }
+    });
 }
 
 // Function to inject the mic toggle next to the mic button
@@ -245,6 +252,13 @@ function injectMicToggle() {
     toggle.addEventListener('change', (e) => {
         chrome.storage.sync.set({ micEnabled: !e.target.checked });
     });
+
+    // Listen for storage changes to sync toggle in real time
+    chrome.storage.onChanged.addListener((changes, area) => {
+        if (area === 'sync' && changes.micEnabled) {
+            toggle.checked = changes.micEnabled.newValue === false;
+        }
+    });
 }
 
 // Function to inject the camera toggle next to the camera button
@@ -388,6 +402,13 @@ function injectCameraToggle() {
 
     toggle.addEventListener('change', (e) => {
         chrome.storage.sync.set({ cameraEnabled: !e.target.checked });
+    });
+
+    // Listen for storage changes to sync toggle in real time
+    chrome.storage.onChanged.addListener((changes, area) => {
+        if (area === 'sync' && changes.cameraEnabled) {
+            toggle.checked = changes.cameraEnabled.newValue === false;
+        }
     });
 }
 
